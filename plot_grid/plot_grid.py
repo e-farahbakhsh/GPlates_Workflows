@@ -1,3 +1,12 @@
+'''
+Grid Visualisation
+
+Author: Ehsan Farahbakhsh
+Contact email: e.farahbakhsh@sydney.edu.au
+Date last modified: 16/09/2025
+'''
+
+
 import glob
 import os
 import subprocess
@@ -14,6 +23,7 @@ from moviepy.config import FFMPEG_BINARY
 from moviepy.video.io.ImageSequenceClip import ImageSequenceClip
 import netCDF4 as nc
 import numpy as np
+from sklearn.kernel_ridge import KernelRidge
 from tqdm import tqdm
 import xarray as xr
 
@@ -184,9 +194,7 @@ def _generate_grd_map(gplot, grd_dir, grd_filename, cb_label, vmin, vmax, projec
     
     gplot.plot_coastlines(ax, facecolor="darkgray", edgecolor="none", zorder=2)
     gplot.plot_plate_motion_vectors(ax, spacingX=10, spacingY=10, normalise=True, alpha=0.1, zorder=3)
-    # gplot.plot_ridges(ax, color="dimgray", linewidth=1.5, zorder=4)
-    # gplot.plot_transforms(ax, color="dimgray", linewidth=1.5, zorder=4)
-    gplot.plot_all_topological_sections(ax, color="dimgray", linewidth=1.5, zorder=4)
+    gplot.plot_topological_plate_boundaries(ax, color="dimgray", linewidth=1.5, zorder=4)
     gplot.plot_trenches(ax, color="black", zorder=5)
     gplot.plot_subduction_teeth(ax, spacing=0.05, color="black", zorder=6)
 
